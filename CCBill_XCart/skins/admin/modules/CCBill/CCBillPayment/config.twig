@@ -1,0 +1,83 @@
+{##
+ # CCBill Payments configuration page
+ #}
+
+<table cellspacing="1" cellpadding="5" class="settings-table">
+
+  <tr>
+    <td class="setting-name">
+    <label for="settings_client_account_no">{{ t('Client Account Number') }}</label>
+    </td>
+    <td>
+    <input type="text" id="settings_client_account_no" name="settings[client_account_no]" value="{{ this.paymentMethod.getSetting('client_account_no') }}" class="validate[required,maxSize[6]]" />
+    </td>
+  </tr>
+
+  <tr>
+    <td class="setting-name">
+    <label for="settings_client_subaccount_no">{{ t('Client Subaccount Number') }}</label>
+    </td>
+    <td>
+    <input type="text" id="settings_client_subaccount_no" name="settings[client_subaccount_no]" value="{{ this.paymentMethod.getSetting('client_subaccount_no') }}" class="validate[required,maxSize[4]]" />
+    </td>
+  </tr>
+
+  <tr>
+    <td class="setting-name">
+    <label for="settings_form_name">{{ t('FlexForm ID') }}</label>
+    </td>
+    <td>
+    <input type="text" id="settings_form_name" name="settings[form_name]" value="{{ this.paymentMethod.getSetting('form_name') }}" class="validate[required,maxSize[255]]" />
+    </td>
+  </tr>
+
+  <tr id="row_IsFlexForm">
+    <td class="setting-name">
+    <label for="settings_is_flexform">{{ t('Is Flex Form') }}</label>
+    </td>
+    <td>
+      <select id="settings_is_flexform" name="settings[is_flexform]">
+        <option value="true"  {% if this.isSelected(this.paymentMethod.getSetting('is_flexform'), 'true')  %}selected{% endif %}>Yes</option>
+        <option value="false" {% if this.isSelected(this.paymentMethod.getSetting('is_flexform'), 'false') %}selected{% endif %}>No (Deprecated)</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="setting-name">
+    <label for="settings_salt">{{ t('Salt') }}</label>
+    </td>
+    <td>
+    <input type="text" id="settings_salt" name="settings[salt]" value="{{ this.paymentMethod.getSetting('salt') }}" class="validate[required,maxSize[255]]" />
+    </td>
+  </tr>
+
+  <tr>
+    <td class="setting-name">
+      <label for="settings_currency">{{ t('Currency') }}</label>
+    </td>
+    <td>
+      <select id="settings_currency" name='settings[currency]'>
+        <option value="USD" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'USD') %}selected{% endif %}>US Dollar (USD)</option>
+        <option value="EUR" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'EUR') %}selected{% endif %}>Euro (EUR)</option>
+        <option value="AUD" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'AUD') %}selected{% endif %}>Australian Dollar(AUD)</option>
+        <option value="CAD" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'CAD') %}selected{% endif %}>Canadian Dollar (CAD)</option>
+        <option value="GBP" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'GBP') %}selected{% endif %}>British Pounds Sterling (GBP)</option>
+        <option value="JPY" {% if this.isSelected(this.paymentMethod.getSetting('currency'), 'JPY') %}selected{% endif %}>Japanese Yen (JPY)</option>
+      </select>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+
+  if (jQuery('#settings_is_flexform').val() == true) {
+    jQuery('#row_IsFlexForm').hide();
+  }
+  else {
+    jQuery("label[for='settings_form_name']").html('Form Name');
+  }
+
+  jQuery("#settings_currency").val("{{ this.paymentMethod.getSetting('currency') }}");
+
+</script>

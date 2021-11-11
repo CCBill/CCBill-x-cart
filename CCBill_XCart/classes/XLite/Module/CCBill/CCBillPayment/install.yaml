@@ -1,0 +1,80 @@
+# vim: set ts=2 sw=2 sts=2 et:
+#
+# Fixtures
+#
+# Copyright (c) 2014-2021 CCBill <support@ccbill.com>. All rights reserved
+# See https://www.ccbill.com/license-agreement.html for license details.
+
+XLite\Model\Payment\Method:
+  - service_name: CCBillPayment
+    class: Module\CCBill\CCBillPayment\Model\Payment\Processor\CCBillPayment
+    type: C
+    orderby: -12000
+    adminOrderby: -12000
+    translations:
+      - code: en
+        name: CCBill Payments
+        title: 'Accept credit cards via CCBill'
+        altAdminDescription: 'Accept credit card payments on your site by connecting a CCBill-hosted checkout page with your own CCBill merchant account.'
+    settings:
+      - name: client_account_no
+      - name: client_subaccount_no
+      - name: form_name
+      - name: is_flexform
+      - name: salt
+      - name: currency
+        value: USD
+
+XLite\Model\Config:
+  - name: client_account_no
+    category: 'CCBill\CCBillPayment'
+    type: text
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "Client Account Number"
+  - name: client_subaccount_no
+    category: 'CCBill\CCBillPayment'
+    type: text
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "Client Subaccount Number"
+  - name: form_name
+    category: 'CCBill\CCBillPayment'
+    type: text
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "FlexForm ID"
+  - name: is_flexform
+    category: 'CCBill\CCBillPayment'
+    type: XLite\Module\CCBill\CCBillPayment\View\Page\Admin\FormField\Select\IsFlexForm
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "Is FlexForm"
+  - name: salt
+    category: 'CCBill\CCBillPayment'
+    type: text
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "Salt"
+  - name: currency
+    category: 'CCBill\CCBillPayment'
+    type: XLite\Module\CCBill\CCBillPayment\View\Page\Admin\FormField\Select\IsFlexForm
+    orderby: 100
+    translations:
+      - code: en
+        option_name: "Currency"
+
+XLite\Model\LanguageLabel:
+  - { name: 'Client Account Number', translations: [{ code: en, label: 'Client Account Number' }] }
+  - { name: 'Client Subaccount Number', translations: [{ code: en, label: 'Client Subaccount Number' }] }
+  - { name: 'Form Name', translations: [{ code: en, label: 'Form Name' }] }
+  - { name: 'FlexForm ID', translations: [{ code: en, label: 'FlexForm ID' }] }
+  - { name: 'Is Flex Form', translations: [{ code: en, label: 'Is Flex Form' }] }
+  - { name: 'Is FlexForm', translations: [{ code: en, label: 'Is FlexForm' }] }
+  - { name: 'Salt', translations: [{ code: en, label: 'Salt' }] }
+  - { name: 'Currency', translations: [{ code: en, label: 'Currency.  Must correspond to selected X-Cart currency.' }] }
